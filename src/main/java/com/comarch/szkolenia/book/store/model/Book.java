@@ -1,10 +1,19 @@
 package com.comarch.szkolenia.book.store.model;
 
 public class Book {
+    private int id;
     private String author;
     private String title;
     private double price;
     private String isbn;
+
+    public Book(int id, String author, String title, double price, String isbn) {
+        this.id = id;
+        this.author = author;
+        this.title = title;
+        this.price = price;
+        this.isbn = isbn;
+    }
 
     public Book(String author, String title, double price, String isbn) {
         this.author = author;
@@ -14,6 +23,14 @@ public class Book {
     }
 
     public Book() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAuthor() {

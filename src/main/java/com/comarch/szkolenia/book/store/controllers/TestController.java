@@ -1,13 +1,32 @@
 package com.comarch.szkolenia.book.store.controllers;
 
+import com.comarch.szkolenia.book.store.database.IBookRepository;
+import com.comarch.szkolenia.book.store.database.IOrderRepository;
+import com.comarch.szkolenia.book.store.database.IUserRepository;
+import com.comarch.szkolenia.book.store.model.Book;
+import com.comarch.szkolenia.book.store.model.Order;
+import com.comarch.szkolenia.book.store.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+import java.util.Optional;
+
 @Controller
 public class TestController {
+
+    @Autowired
+    IUserRepository userRepository;
+
+    @Autowired
+    IBookRepository bookRepository;
+
+    @Autowired
+    IOrderRepository orderRepository;
 
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     public String requestParams(@RequestParam String param1,
@@ -43,5 +62,18 @@ public class TestController {
         System.out.println(login);
         System.out.println(password);
         return "main";
+    }
+
+
+    @RequestMapping(value = "/order", method = RequestMethod.GET)
+    public String order() {
+        Order order = new Order();
+        Optional<User> userBox = this.userRepository.getUserByLogin("admin");
+        order.setUser(userBox.get());
+        List<Book> books = this.bookRepository.getBooks();
+        order.setBooks(books);
+
+        this.orderRepository.persist(order);
+        return "asdfgsdf";
     }
 }
