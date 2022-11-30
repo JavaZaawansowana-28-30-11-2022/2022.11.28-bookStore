@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 
-@Repository
 public class OrderDAO implements IOrderRepository {
     @Autowired
     Connection connection;
@@ -39,5 +38,10 @@ public class OrderDAO implements IOrderRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Order getOrderById(int id) {
+        return null;
     }
 }

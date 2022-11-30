@@ -1,5 +1,6 @@
 package com.comarch.szkolenia.book.store.configuration;
 
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,5 +21,10 @@ public class AppConfiguration {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Bean
+    public SessionFactory sessionFactory() {
+        return new org.hibernate.cfg.Configuration().configure().buildSessionFactory();
     }
 }

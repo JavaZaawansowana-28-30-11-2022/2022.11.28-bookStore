@@ -4,6 +4,7 @@ import com.comarch.szkolenia.book.store.database.IBookRepository;
 import com.comarch.szkolenia.book.store.database.IOrderRepository;
 import com.comarch.szkolenia.book.store.database.IUserRepository;
 import com.comarch.szkolenia.book.store.model.Book;
+import com.comarch.szkolenia.book.store.model.Cos;
 import com.comarch.szkolenia.book.store.model.Order;
 import com.comarch.szkolenia.book.store.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,32 @@ public class TestController {
         order.setUser(userBox.get());
         List<Book> books = this.bookRepository.getBooks();
         order.setBooks(books);
+
+        this.orderRepository.persist(order);
+        return "asdfgsdf";
+    }
+
+    @RequestMapping(value = "/order2", method = RequestMethod.GET)
+    public String order2() {
+        Order order = this.orderRepository.getOrderById(1);
+        System.out.println(order);
+        //session.close();
+        return "asdfgsdf";
+    }
+
+    @RequestMapping(value = "/order3", method = RequestMethod.GET)
+    public String order3() {
+        Order order = new Order();
+        Optional<User> userBox = this.userRepository.getUserByLogin("admin");
+        order.setUser(userBox.get());
+        List<Book> books = this.bookRepository.getBooks();
+        order.setBooks(books);
+
+        order.getCosSet().add(new Cos(0, "asdf", 4));
+        order.getCosSet().add(new Cos(0, "sadfas", 5));
+        order.getCosSet().add(new Cos(0, "sadfasdfff", 8));
+        order.getCosSet().add(new Cos(0, "sdd", 3));
+        order.getCosSet().add(new Cos(0, "bnvdfsg", 1234));
 
         this.orderRepository.persist(order);
         return "asdfgsdf";

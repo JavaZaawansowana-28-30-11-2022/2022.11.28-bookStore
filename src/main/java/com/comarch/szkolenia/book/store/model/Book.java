@@ -1,6 +1,14 @@
 package com.comarch.szkolenia.book.store.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name = "tbook")
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String author;
     private String title;
@@ -63,5 +71,17 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Book{");
+        sb.append("id=").append(id);
+        sb.append(", author='").append(author).append('\'');
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", price=").append(price);
+        sb.append(", isbn='").append(isbn).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
